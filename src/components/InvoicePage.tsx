@@ -141,7 +141,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
     const saleTax = subTotal ? (subTotal * taxRate) / 100 : 0
 
     setSaleTax(saleTax)
-  }, [subTotal, invoice.taxLabel])
+  }, [subTotal, invoice.taxLabel, locCurrency])
 
   return (
     <Document pdfMode={pdfMode}>
@@ -437,7 +437,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
               </View>
               <View className="w-50 p-5 flex" pdfMode={pdfMode}>
                 <EditableInput
-                  className="dark bold right ml-30"
+                  className="dark bold right ml-40"
                   value={locCurrency}
                   onChange={(value) => handleChange('currency', value)}
                   pdfMode={pdfMode}
