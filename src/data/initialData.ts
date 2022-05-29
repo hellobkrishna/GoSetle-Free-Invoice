@@ -36,9 +36,19 @@ export const initialInvoice: Invoice = {
   productLineQuantityAmount: 'Amount',
   productLines: [
     {
-      description: 'GoSetle Premium Invoice ',
+      description: 'App Development ',
       quantity: '1',
-      rate: '249.00',
+      rate: '21999',
+    },
+    {
+      description: 'Graphic Designing ',
+      quantity: '1',
+      rate: '999.00',
+    },
+    {
+      description: 'Website Designing ',
+      quantity: '1',
+      rate: '19999.00',
     },
     // { ...initialProductLine },
     // { ...initialProductLine },
