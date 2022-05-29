@@ -244,7 +244,7 @@ const countryList = [
   { value: 'Australia', text: 'Australia' },
   { value: 'Austria', text: 'Austria' },
   { value: 'Aruba', text: 'Aruba' },
-  { value: 'India', text: 'India' },
+  { value: 'India', text: 'India',kk:'INRA' },
   { value: 'Aland Islands', text: 'Aland Islands' },
   { value: 'Azerbaijan', text: 'Azerbaijan' },
   { value: 'Ireland', text: 'Ireland' },

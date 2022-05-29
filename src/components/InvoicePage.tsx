@@ -57,7 +57,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
       } else if (name !== 'logoWidth' && typeof value === 'string') {
         newInvoice[name] = value
       }
-
+console.log(invoice.companyAddress)
       setInvoice(newInvoice)
     }
   }
@@ -112,11 +112,13 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
   }
   useEffect(() => {
     //currency API start
-    const baseURL = "http://ip-api.com/json?fields=status,country,currency";
+    // const baseURL = "http://ip-api.com/json?fields=status,country,currency";
+    const baseURL = "https://ipgeolocation.abstractapi.com/v1/?api_key=18200c9b2f404addbbad45c7f1eac214";
+
     axios.get(baseURL)
     .then( res =>  {
-      // console.log("Country is : ", res.data.currency);
-      setlocCurrency(res.data.currency)
+      console.log("Country is : ", res.data.currency.currency_code);
+      setlocCurrency(res.data.currency.currency_code)
       // console.log("Country Final : ", locCurrency);
 
    })
