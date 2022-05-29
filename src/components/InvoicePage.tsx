@@ -15,8 +15,6 @@ import { Font } from '@react-pdf/renderer'
 import Download from './DownloadPDF'
 import format from 'date-fns/format'
 import axios from "axios";
-import { faAlignRight } from '@fortawesome/free-solid-svg-icons'
-
 
 Font.register({
   family: 'Nunito',
@@ -485,9 +483,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
             pdfMode={pdfMode}
           />
         </View>
-       
       </Page>
-      
     </Document>
   )
 }
