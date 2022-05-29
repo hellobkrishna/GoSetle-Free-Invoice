@@ -14,7 +14,7 @@ import Text from './Text'
 import { Font } from '@react-pdf/renderer'
 import Download from './DownloadPDF'
 import format from 'date-fns/format'
-import axios from "axios";
+// import axios from "axios";
 
 Font.register({
   family: 'Nunito',
@@ -30,12 +30,15 @@ interface Props {
 }
 
 const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
+  // const [locCurrency, setlocCurrency] = useState('')
   const [invoice, setInvoice] = useState<Invoice>(data ? { ...data } : { ...initialInvoice })
   const [subTotal, setSubTotal] = useState<number>()
   const [saleTax, setSaleTax] = useState<number>()
-  const [locCurrency, setlocCurrency] = useState('')
+  
+  //const [countryFlag, setCountryFlag] = useState('')
+  //const [countryName, setcountryName] = useState('')
 
-
+    
 
   const dateFormat = 'MMM dd, yyyy'
   const invoiceDate = invoice.invoiceDate !== '' ? new Date(invoice.invoiceDate) : new Date()
@@ -57,7 +60,6 @@ const InvoicePage: FC<Props> = ({ data, pdfMode }) => {
       } else if (name !== 'logoWidth' && typeof value === 'string') {
         newInvoice[name] = value
       }
-console.log(invoice.companyAddress)
       setInvoice(newInvoice)
     }
   }
@@ -111,19 +113,6 @@ console.log(invoice.companyAddress)
     return amount.toFixed(2)
   }
   useEffect(() => {
-    //currency API start
-    // const baseURL = "http://ip-api.com/json?fields=status,country,currency";
-    const baseURL = "https://ipgeolocation.abstractapi.com/v1/?api_key=18200c9b2f404addbbad45c7f1eac214";
-
-    axios.get(baseURL)
-    .then( res =>  {
-      console.log("Country is : ", res.data.currency.currency_code);
-      setlocCurrency(res.data.currency.currency_code)
-      // console.log("Country Final : ", locCurrency);
-
-   })
-    //currency API End
-
     let subTotal = 0
 
     invoice.productLines.forEach((productLine) => {
@@ -143,8 +132,28 @@ console.log(invoice.companyAddress)
     const saleTax = subTotal ? (subTotal * taxRate) / 100 : 0
 
     setSaleTax(saleTax)
-  }, [subTotal, invoice.taxLabel, locCurrency])
+  }, [subTotal, invoice.taxLabel])
 
+  // useEffect(() => {
+
+  //   if(invoice.currency==''){
+  // //currency API start
+  //   // const baseURL = "http://ip-api.com/json?fields=status,country,currency";
+  //   // const baseURL ="https://api.ipregistry.co/103.54.27.69?key=z1hghi9pvb2gj11q"
+  //   const baseURL = "https://ipgeolocation.abstractapi.com/v1/?api_key=18200c9b2f404addbbad45c7f1eac214";
+
+  //   axios.get(baseURL)
+  //   .then( res =>  {
+  //     // console.log("Country is : ", res?.data);
+  //     setlocCurrency(res?.data?.currency?.currency_code)
+  //     // setCountryFlag(res?.data?.flag?.emoji)
+  //     // setcountryName(res?.data?.country)
+  //     // console.log("Country Final : ", locCurrency);
+
+  //  })
+  // }
+  //   //currency API End
+  // }, []);
   return (
     <Document pdfMode={pdfMode}>
       <Page className="invoice-wrapper" pdfMode={pdfMode}>
@@ -189,9 +198,11 @@ console.log(invoice.companyAddress)
             <EditableSelect
               options={countryList}
               value={invoice.companyCountry}
+              
               onChange={(value) => handleChange('companyCountry', value)}
               pdfMode={pdfMode}
             />
+            
           </View>
           <View className="w-50" pdfMode={pdfMode}>
             <EditableInput
@@ -440,7 +451,7 @@ console.log(invoice.companyAddress)
               <View className="w-50 p-5 flex" pdfMode={pdfMode}>
                 <EditableInput
                   className="dark bold right ml-40"
-                  value={locCurrency}
+                  value={invoice.currency}
                   onChange={(value) => handleChange('currency', value)}
                   pdfMode={pdfMode}
                 />
