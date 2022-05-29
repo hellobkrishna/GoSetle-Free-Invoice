@@ -1,27 +1,4 @@
 import { ProductLine, Invoice } from './types'
-import getSymbolFromCurrency from 'currency-symbol-map'
-import axios from "axios";
-import React, {useEffect} from "react";
-
-
-
-
-// const getC=()=>{
-//   const baseURL = "http://ip-api.com/json?fields=status,country,currency";
-
-
-//   useEffect(() => {
-//     axios.get(baseURL)
-//     .then( res =>  {
-//       console.log("Country is : ", res);
-
-//    })
-//  },[])
-
-
-  
-// }
-
 
 
 export const initialProductLine: ProductLine = {
@@ -29,14 +6,6 @@ export const initialProductLine: ProductLine = {
   quantity: '1',
   rate: '0.00',
 }
-
-
- 
-
-  
-
-
-
 
 
 export const initialInvoice: Invoice = {
